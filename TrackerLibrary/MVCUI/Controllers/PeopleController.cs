@@ -30,7 +30,14 @@ namespace MVCUI.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
+                PersonModel p = new PersonModel();
+
+                p.FirstName = collection["FirstName"];
+                p.LastName = collection["LastName"];
+                p.EmailAddress = collection["EmailAddress"];
+                p.CellphoneNumber = collection["CellphoneNumber"];
+
+                GlobalConfig.Connection.CreatePerson(p);
 
                 return RedirectToAction("Index");
             }
