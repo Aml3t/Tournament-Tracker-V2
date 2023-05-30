@@ -52,9 +52,9 @@ namespace TrackerUI
             this.TournamentViewerLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
             this.TournamentViewerLabel.Location = new System.Drawing.Point(28, 29);
             this.TournamentViewerLabel.Name = "TournamentViewerLabel";
-            this.TournamentViewerLabel.Size = new System.Drawing.Size(181, 45);
+            this.TournamentViewerLabel.Size = new System.Drawing.Size(197, 45);
             this.TournamentViewerLabel.TabIndex = 0;
-            this.TournamentViewerLabel.Text = "Turnament:";
+            this.TournamentViewerLabel.Text = "Tournament:";
             this.TournamentViewerLabel.Click += new System.EventHandler(this.label1_Click);
             // 
             // tournamentName

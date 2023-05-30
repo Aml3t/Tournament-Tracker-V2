@@ -64,7 +64,7 @@ namespace TrackerUI
             this.loadExistingTorunamentLabel.Name = "loadExistingTorunamentLabel";
             this.loadExistingTorunamentLabel.Size = new System.Drawing.Size(266, 30);
             this.loadExistingTorunamentLabel.TabIndex = 19;
-            this.loadExistingTorunamentLabel.Text = "Load Existing Torunament ";
+            this.loadExistingTorunamentLabel.Text = "Load Existing Tournament ";
             this.loadExistingTorunamentLabel.Click += new System.EventHandler(this.loadExistingTorunamentLabel_Click);
             // 
             // loadTournamentButton
@@ -80,7 +80,7 @@ namespace TrackerUI
             this.loadTournamentButton.Name = "loadTournamentButton";
             this.loadTournamentButton.Size = new System.Drawing.Size(269, 58);
             this.loadTournamentButton.TabIndex = 21;
-            this.loadTournamentButton.Text = "Load Torunament";
+            this.loadTournamentButton.Text = "Load Tournament";
             this.loadTournamentButton.UseVisualStyleBackColor = true;
             this.loadTournamentButton.Click += new System.EventHandler(this.loadTournamentButton_Click);
             // 
