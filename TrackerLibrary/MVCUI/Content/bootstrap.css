@@ -12518,7 +12518,7 @@ textarea.form-control-lg {
 }
 
 .table {
-    font-size: 0.875rem;
+    font-size: 1rem;
 }
 
     .table .thead-dark th {
@@ -12542,7 +12542,7 @@ label,
 .radio label,
 .checkbox label,
 .help-block {
-    font-size: 0.875rem;
+    font-size: 1rem;
 }
 
 .form-control {
