@@ -26,20 +26,25 @@ namespace MVCUI.Controllers
 
         // POST: People/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(PersonModel p)
         {
             try
             {
-                PersonModel p = new PersonModel();
+                if (ModelState.IsValid)
+                {
+                    //PersonModel p = new PersonModel();
+                    //p.FirstName = collection["FirstName"];
+                    //p.LastName = collection["LastName"];
+                    //p.EmailAddress = collection["EmailAddress"];
+                    //p.CellphoneNumber = collection["CellphoneNumber"];
 
-                p.FirstName = collection["FirstName"];
-                p.LastName = collection["LastName"];
-                p.EmailAddress = collection["EmailAddress"];
-                p.CellphoneNumber = collection["CellphoneNumber"];
-
-                GlobalConfig.Connection.CreatePerson(p);
-
-                return RedirectToAction("Index");
+                    GlobalConfig.Connection.CreatePerson(p);
+                    return RedirectToAction("Index"); 
+                }
+                else
+                {
+                    return View();
+                }
             }
             catch
             {
