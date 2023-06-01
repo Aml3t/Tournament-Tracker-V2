@@ -41,13 +41,14 @@ namespace MVCUI.Controllers
                 {
                     TeamModel t = new TeamModel();
                     t.TeamName = model.TeamName;
-                    
+                    t.TeamMembers = model.SelectedTeamMembers.Select(x => new PersonModel { Id = int.Parse(x)}).ToList();
+
                     GlobalConfig.Connection.CreateTeam(t);
                     return RedirectToAction("Index");
                 }
                 else
                 {
-                    return View();
+                    return RedirectToAction("Create");
                 }
             }
             catch
