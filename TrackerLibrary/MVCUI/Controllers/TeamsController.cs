@@ -37,9 +37,18 @@ namespace MVCUI.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                if (ModelState.IsValid && model.SelectedTeamMembers.Count > 0)
+                {
+                    TeamModel t = new TeamModel();
+                    t.TeamName = model.TeamName;
+                    
+                    GlobalConfig.Connection.CreateTeam(t);
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return View();
+                }
             }
             catch
             {
