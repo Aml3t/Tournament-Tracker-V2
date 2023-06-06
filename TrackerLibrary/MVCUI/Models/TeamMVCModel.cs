@@ -18,8 +18,6 @@ namespace MVCUI.Models
 
         [Display(Name = "Team Members List")]
         public List<SelectListItem> TeamMembers { get; set; } = new List<SelectListItem>();
-
         public List<string> SelectedTeamMembers { get; set; } = new List<string>();
-
     }
 }
