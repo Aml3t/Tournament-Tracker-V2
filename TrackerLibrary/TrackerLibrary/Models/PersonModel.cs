@@ -39,8 +39,4 @@ namespace TrackerLibrary.Models
 
         }
     }
-    
-
-   
-
 }

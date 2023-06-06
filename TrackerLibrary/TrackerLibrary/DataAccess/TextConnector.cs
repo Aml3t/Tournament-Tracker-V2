@@ -4,6 +4,8 @@ using System.Text;
 using TrackerLibrary.Models;
 using TrackerLibrary.DataAccess.TextHelper;
 using System.Linq;
+using System.Xml;
+using System.Net;
 
 namespace TrackerLibrary.DataAccess
 {
@@ -119,6 +121,14 @@ namespace TrackerLibrary.DataAccess
            return GlobalConfig.TeamFile.FullFilePath().LoadFile().ConvertToTeamModels();
         }
 
+        public List<PrizeModel> GetPrizes_All()
+        {
+            List<PrizeModel> output;
+            
+            output = GlobalConfig.PrizesFile.FullFilePath().LoadFile().ConvertToPrizeModels();
+
+            return output;
+        }
         public List<TournamentModel> GetTournament_All()
         {
             return GlobalConfig.TournamentFile.FullFilePath().LoadFile().ConvertToTournamentModels();
