@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MVCUI.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -18,7 +19,17 @@ namespace MVCUI.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            TournamentMVCModel input = new TournamentMVCModel();
+            
+            List<TeamModel> allTeams = GlobalConfig.Connection.GetTeam_All();
+
+            List<PrizeModel> allPrizes = GlobalConfig.Connection.GetPrizes_All();
+
+            input.EnteredTeams = allTeams.Select(x => new SelectListItem { Text = x.TeamName, Value = x.Id.ToString() }).ToList();
+            input.Prizes = allPrizes.Select(x => new SelectListItem { Text = x.PlaceName, Value = x.Id.ToString() }).ToList();
+
+
+            return View(input);
         }
 
         // POST: Tournaments/Create
