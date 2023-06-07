@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using TrackerLibrary;
@@ -35,20 +36,25 @@ namespace MVCUI.Controllers
         // POST: Tournaments/Create
         [ValidateAntiForgeryToken()]
         [HttpPost]
-        public ActionResult Create(TournamentModel p)
+        public ActionResult Create(TournamentMVCModel model)
         {
             try
             {
-                if (ModelState.IsValid)
+                if (ModelState.IsValid && model.SelectedEnteredTeams.Count > 0)
                 {
-                    // TODO - Create the tournament
-                    //GlobalConfig.Connection.CreateTournament(p);
-                    
+                    TournamentModel t = new TournamentModel();
+                    t.TournamentName = model.TournamentName;
+                    t.EntryFee = model.EntryFee;
+                    t.EnteredTeams = model.SelectedEnteredTeams.Select(x => new TeamModel { Id = int.Parse(x) }).ToList();
+
+                    GlobalConfig.Connection.CreateTournament(t);
+
                     return RedirectToAction("Index");
                 }
+
                 else
                 {
-                    return View();
+                    return RedirectToAction("Create");
                 }
             }
             catch
