@@ -46,10 +46,11 @@ namespace MVCUI.Controllers
                     t.TournamentName = model.TournamentName;
                     t.EntryFee = model.EntryFee;
                     t.EnteredTeams = model.SelectedEnteredTeams.Select(x => new TeamModel { Id = int.Parse(x) }).ToList();
+                    t.Prizes = model.SelectedPrizes.Select(x => new PrizeModel { Id = int.Parse(x) }).ToList();
 
                     GlobalConfig.Connection.CreateTournament(t);
 
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index", "Home");
                 }
 
                 else
