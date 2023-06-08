@@ -106,10 +106,6 @@ namespace TrackerLibrary
 
             to = p.EmailAddress;
 
-          
-
-          
-
             EmailLogic.SendEmail( to, subject, body.ToString());
         }
 

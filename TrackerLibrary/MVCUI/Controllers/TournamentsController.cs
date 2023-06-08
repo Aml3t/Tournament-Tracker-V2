@@ -48,6 +48,10 @@ namespace MVCUI.Controllers
                     t.EnteredTeams = model.SelectedEnteredTeams.Select(x => new TeamModel { Id = int.Parse(x) }).ToList();
                     t.Prizes = model.SelectedPrizes.Select(x => new PrizeModel { Id = int.Parse(x) }).ToList();
 
+                    TournamentLogic.CreateRounds(t);
+
+                    t.AlertUsersToNewRound();
+
                     GlobalConfig.Connection.CreateTournament(t);
 
                     return RedirectToAction("Index", "Home");
