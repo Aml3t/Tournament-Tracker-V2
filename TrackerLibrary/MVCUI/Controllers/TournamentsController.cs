@@ -50,9 +50,9 @@ namespace MVCUI.Controllers
 
                     TournamentLogic.CreateRounds(t);
 
-                    t.AlertUsersToNewRound();
-
                     GlobalConfig.Connection.CreateTournament(t);
+
+                    t.AlertUsersToNewRound();
 
                     return RedirectToAction("Index", "Home");
                 }
