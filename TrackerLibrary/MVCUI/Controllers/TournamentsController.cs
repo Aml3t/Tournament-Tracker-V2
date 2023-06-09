@@ -21,7 +21,7 @@ namespace MVCUI.Controllers
         public ActionResult Details(int? id)
         {
             List<TournamentModel> tournaments = GlobalConfig.Connection.GetTournament_All();
-
+            
             try
             {
                 TournamentMVCDetailsModel input = new TournamentMVCDetailsModel();
@@ -30,6 +30,12 @@ namespace MVCUI.Controllers
 
                 input.TournamentName = t.TournamentName;
 
+                var orderedRounds = t.Rounds.OrderBy(x => x.First().MatchupRound).ToList();
+
+                for (int i = 0; i < orderedRounds.Count; i++)
+                {
+
+                }
                 foreach (var round in t.Rounds)
                 {
                     input.Rounds.Add(new RoundMVCModel { RoundName = "Round" + round.First().MatchupRound.ToString()}, Status);
