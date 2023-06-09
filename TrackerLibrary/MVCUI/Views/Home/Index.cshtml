@@ -23,6 +23,7 @@
             <ul class="list-unstyled tourney-display">
                 @foreach (var item in Model)
                 {
+                    <li>@Html.ActionLink(item.TournamentName, "Details", "Tournaments", new { id = item.Id}, new {})</li>
                     <li><a href="/">@item.TournamentName</a></li>
                 }
             </ul>

@@ -18,13 +18,19 @@ namespace MVCUI.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public ActionResult Details(int id)
+        public ActionResult Details(int? id)
         {
             List<TournamentModel> tournaments = GlobalConfig.Connection.GetTournament_All();
 
             try
             {
-                return View(tournaments.Where(x => x.Id == id).First());
+                TournamentMVCDetailsModel input = new TournamentMVCDetailsModel();
+
+                TournamentModel t = tournaments.Where(x => x.Id == id).First();
+
+                input.TournamentName = t.TournamentName;
+
+                return View(input);
             }
             catch 
             {
