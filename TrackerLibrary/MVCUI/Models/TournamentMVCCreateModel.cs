@@ -9,7 +9,7 @@ using TrackerLibrary.Models;
 
 namespace MVCUI.Models
 {
-    public class TournamentMVCModel
+    public class TournamentMVCCreateModel
     {
         [DisplayName("Tournament Name")]
         [Required]
