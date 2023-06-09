@@ -11,5 +11,8 @@ namespace MVCUI.Models
     {
         [DisplayName("Tournament Name")]
         public string TournamentName { get; set; }
+
+        public List<RoundMVCModel> Rounds { get; set; } = new List<RoundMVCModel>();
+
     }
 }

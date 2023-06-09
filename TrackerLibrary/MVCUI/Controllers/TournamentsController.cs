@@ -30,6 +30,11 @@ namespace MVCUI.Controllers
 
                 input.TournamentName = t.TournamentName;
 
+                foreach (var round in t.Rounds)
+                {
+                    input.Rounds.Add(new RoundMVCModel { RoundName = "Round" + round.First().MatchupRound.ToString()}, Status);
+                }
+
                 return View(input);
             }
             catch 
