@@ -33,6 +33,12 @@
                 }
         </div>
         <div class="col-md-9">
+            <ul>
+                @foreach (var item in Model.Matchups)
+                {
+                    <li>@item.FirstTeamName vs @item.SecondTeamName</li>
+                }
+            </ul>
 
         </div>
     </div>

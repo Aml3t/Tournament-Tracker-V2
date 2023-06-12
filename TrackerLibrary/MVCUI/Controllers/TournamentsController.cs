@@ -80,14 +80,31 @@ namespace MVCUI.Controllers
             foreach (var item in input)
             {
                 int teamTwoId = 0;
+                string teamOneName = "";
                 string teamTwoName = "Bought Slot";
                 double teamTwoScore = 0;
 
-                if (item.Entries.Count > 1)
+                if (item.Entries[0].TeamCompeting == null)
+                {
+                    teamOneName = "To Be Determined";
+                }
+                else
+                {
+                    teamOneName = item.Entries[0].TeamCompeting.TeamName;
+                }
 
+                if (item.Entries.Count > 1)
                 {
                     teamTwoId = item.Entries[1].Id;
-                    teamTwoName = item.Entries[1].TeamCompeting.TeamName;
+                    if (item.Entries[1].TeamCompeting == null)
+                    {
+                        teamTwoName = "To Be Determined";
+
+                    }
+                    else
+                    {
+                        teamTwoName = item.Entries[1].TeamCompeting.TeamName;
+                    }
                     teamTwoScore = item.Entries[1].Score;
                 }
 
@@ -95,16 +112,14 @@ namespace MVCUI.Controllers
                 {
                     MatchupId = item.Id,
                     FirstTeamMatchupEntryId = item.Entries[0].Id,
-                    FirstTeamName = item.Entries[0].TeamCompeting.TeamName,
+                    FirstTeamName = teamOneName,
                     FirstTeamScore = item.Entries[0].Score,
                     SecondTeamMatchupEntryId = teamTwoId,
                     SecondTeamName = teamTwoName,
                     SecondTeamScore = teamTwoScore
                 });
             }
-            
             return output;
-
         }
 
 
