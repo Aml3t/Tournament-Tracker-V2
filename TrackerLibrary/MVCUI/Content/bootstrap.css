@@ -12629,3 +12629,30 @@ label,
 section.row {
     background-color: #495057;
 }
+
+.label-success {
+    background-color: #5cb85c;
+}
+
+    .label-success[href]:hover,
+    .label-success[href]:focus {
+        background-color: #449d44;
+    }
+
+.label-default {
+    background-color: #4e5d6c;
+}
+
+    .label-default[href]:hover,
+    .label-default[href]:focus {
+        background-color: #39444e;
+    }
+
+.label-danger {
+    background-color: #d9534f;
+}
+
+    .label-danger[href]:hover,
+    .label-danger[href]:focus {
+        background-color: #c9302c;
+    }
