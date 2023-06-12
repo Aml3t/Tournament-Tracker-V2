@@ -11,6 +11,7 @@ namespace MVCUI.Models
         public int FirstTeamMatchupEntryId { get; set; }
         public string FirstTeamName { get; set; }
         public double FirstTeamScore { get; set; }
+        public int SecondTeamMatchupEntryId { get; set; }
         public string SecondTeamName { get; set; }
         public double SecondTeamScore { get; set; }
 

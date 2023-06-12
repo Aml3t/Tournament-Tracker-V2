@@ -60,7 +60,8 @@ namespace MVCUI.Controllers
                     input.Rounds.Add(new RoundMVCModel { RoundName = "Round " + (i + 1), Status = status, RoundNumber = i + 1 });
 
                 }
-                List<MatchupMVCModel> matchups = GetMatchups(orderedRounds[roundId - 1]);
+
+                input.Matchups = GetMatchups(orderedRounds[roundId - 1]);
 
                 return View(input);
             }
@@ -72,19 +73,39 @@ namespace MVCUI.Controllers
 
         }
 
-        private List<MatchupMVCModel> GetMatchups(List<MatchupMVCModel> input)
+        private List<MatchupMVCModel> GetMatchups(List<MatchupModel> input)
         {
             List<MatchupMVCModel> output = new List<MatchupMVCModel>();
 
+            foreach (var item in input)
+            {
+                int teamTwoId = 0;
+                string teamTwoName = "Bought Slot";
+                double teamTwoScore = 0;
 
-            // TODO - Fill this in
+                if (item.Entries.Count > 1)
 
-            throw new NotImplementedException();
+                {
+                    teamTwoId = item.Entries[1].Id;
+                    teamTwoName = item.Entries[1].TeamCompeting.TeamName;
+                    teamTwoScore = item.Entries[1].Score;
+                }
+
+                output.Add(new MatchupMVCModel
+                {
+                    MatchupId = item.Id,
+                    FirstTeamMatchupEntryId = item.Entries[0].Id,
+                    FirstTeamName = item.Entries[0].TeamCompeting.TeamName,
+                    FirstTeamScore = item.Entries[0].Score,
+                    SecondTeamMatchupEntryId = teamTwoId,
+                    SecondTeamName = teamTwoName,
+                    SecondTeamScore = teamTwoScore
+                });
+            }
             
             return output;
 
         }
-
 
 
         public ActionResult Create()
