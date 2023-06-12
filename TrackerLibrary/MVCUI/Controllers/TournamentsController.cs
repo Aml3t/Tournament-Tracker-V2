@@ -34,6 +34,8 @@ namespace MVCUI.Controllers
                 var orderedRounds = t.Rounds.OrderBy(x => x.First().MatchupRound).ToList();
                 bool activeFound = false;
 
+
+
                 for (int i = 0; i < orderedRounds.Count; i++)
                 {
                     RoundStatus status = RoundStatus.Locked;
@@ -48,10 +50,17 @@ namespace MVCUI.Controllers
                         {
                             status = RoundStatus.Active;
                             activeFound = true;
+                            if (roundId == 0)
+                            {
+                                roundId = i + 1;
+                            }
                         }
                     }
+
                     input.Rounds.Add(new RoundMVCModel { RoundName = "Round " + (i + 1), Status = status, RoundNumber = i + 1 });
+
                 }
+                List<MatchupMVCModel> matchups = GetMatchups(orderedRounds[roundId - 1]);
 
                 return View(input);
             }
@@ -62,6 +71,21 @@ namespace MVCUI.Controllers
             }
 
         }
+
+        private List<MatchupMVCModel> GetMatchups(List<MatchupMVCModel> input)
+        {
+            List<MatchupMVCModel> output = new List<MatchupMVCModel>();
+
+
+            // TODO - Fill this in
+
+            throw new NotImplementedException();
+            
+            return output;
+
+        }
+
+
 
         public ActionResult Create()
         {
