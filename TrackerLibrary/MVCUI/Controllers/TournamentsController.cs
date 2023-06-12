@@ -19,7 +19,7 @@ namespace MVCUI.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? id, int roundId = 0)
         {
             List<TournamentModel> tournaments = GlobalConfig.Connection.GetTournament_All();
             

@@ -15,7 +15,7 @@
                 @foreach (var item in Model.Rounds)
                 {
                     <li>
-                        @Html.ActionLink(item.RoundName, "Details", "Tournaments", new { id = item.RoundNumber }, new { })
+                        @Html.ActionLink(item.RoundName, "Details", "Tournaments", new { roundId = item.RoundNumber }, new { })
                         &nbsp;
                         @if (item.Status == RoundStatus.Complete)
                         {
