@@ -96,6 +96,7 @@ namespace MVCUI.Controllers
                 if (item.Entries.Count > 1)
                 {
                     teamTwoId = item.Entries[1].Id;
+
                     if (item.Entries[1].TeamCompeting == null)
                     {
                         teamTwoName = "To Be Determined";

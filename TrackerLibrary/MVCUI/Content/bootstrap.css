@@ -12656,3 +12656,8 @@ section.row {
     .label-danger[href]:focus {
         background-color: #c9302c;
     }
+
+.form-inline .control-label {
+    margin-bottom: 0;
+    vertical-align: middle;
+}
