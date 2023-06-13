@@ -73,7 +73,7 @@ namespace MVCUI.Controllers
 
         }
 
-        private List<MatchupMVCModel> GetMatchups(List<MatchupModel> input)
+        private List<MatchupMVCModel> GetMatchups(List<MatchupModel> input, int roundId = 0)
         {
             List<MatchupMVCModel> output = new List<MatchupMVCModel>();
 
@@ -81,7 +81,7 @@ namespace MVCUI.Controllers
             {
                 int teamTwoId = 0;
                 string teamOneName = "";
-                string teamTwoName = "Bought Slot";
+                string teamTwoName = "Bye";
                 double teamTwoScore = 0;
 
                 if (item.Entries[0].TeamCompeting == null)
@@ -96,11 +96,9 @@ namespace MVCUI.Controllers
                 if (item.Entries.Count > 1)
                 {
                     teamTwoId = item.Entries[1].Id;
-
                     if (item.Entries[1].TeamCompeting == null)
                     {
                         teamTwoName = "To Be Determined";
-
                     }
                     else
                     {
@@ -112,6 +110,8 @@ namespace MVCUI.Controllers
                 output.Add(new MatchupMVCModel
                 {
                     MatchupId = item.Id,
+                    //TournamentId = tournamentId,
+                    //RoundNumber = roundId,
                     FirstTeamMatchupEntryId = item.Entries[0].Id,
                     FirstTeamName = teamOneName,
                     FirstTeamScore = item.Entries[0].Score,
@@ -120,6 +120,7 @@ namespace MVCUI.Controllers
                     SecondTeamScore = teamTwoScore
                 });
             }
+
             return output;
         }
 
