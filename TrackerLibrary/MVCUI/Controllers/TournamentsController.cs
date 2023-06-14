@@ -30,20 +30,41 @@ namespace MVCUI.Controllers
                 {
                     List<TournamentModel> tournaments = GlobalConfig.Connection.GetTournament_All();
                     TournamentModel t = tournaments.Where(x => x.Id == model.TournamentId).First();
-                    MatchupModel match;
+                    MatchupModel foundMatch = new MatchupModel();
 
+                    foreach (var round in t.Rounds)
+                    {
+                        foreach (var matchup in round)
+                        {
+                            if (matchup.Id == model.MatchupId)
+                            {
+                                foundMatch = matchup;
+                            }
+                        }
+                    }
 
-                    return RedirectToAction("Index");
+                    for (int i = 0; i < foundMatch.Entries.Count; i++)
+                    {
+                        if (i == 0)
+                        {
+                            foundMatch.Entries[i].Score = model.FirstTeamScore;
+                        }
+                        else if (i == 1)
+                        {
+                            foundMatch.Entries[i].Score = model.SecondTeamScore;
+
+                        }
+                    }
+
+                    TournamentLogic.UpdateTournamentResults(t);
                 }
-                else
-                {
-                    return View();
-                }
+
             }
             catch
             {
-                return View();
             }
+            return RedirectToAction("Details", "Tournaments", new { id = model.TournamentId, roundId = model.RoundNumber });
+
         }
 
         public ActionResult Details(int id, int roundId = 0)
