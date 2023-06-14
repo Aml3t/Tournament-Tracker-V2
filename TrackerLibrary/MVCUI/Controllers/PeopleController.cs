@@ -25,20 +25,14 @@ namespace MVCUI.Controllers
         }
 
         // POST: People/Create
-        [ValidateAntiForgeryToken()]
         [HttpPost]
+        [ValidateAntiForgeryToken()]
         public ActionResult Create(PersonModel p)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    //PersonModel p = new PersonModel();
-                    //p.FirstName = collection["FirstName"];
-                    //p.LastName = collection["LastName"];
-                    //p.EmailAddress = collection["EmailAddress"];
-                    //p.CellphoneNumber = collection["CellphoneNumber"];
-
                     GlobalConfig.Connection.CreatePerson(p);
                     return RedirectToAction("Index"); 
                 }

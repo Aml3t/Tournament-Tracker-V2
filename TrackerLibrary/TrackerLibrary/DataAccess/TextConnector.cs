@@ -35,7 +35,6 @@ namespace TrackerLibrary.DataAccess
 
 
 
-        // TODO - Write up the CreatePrize for text files.
         public void CreatePrize(PrizeModel model)
         {
 

@@ -20,15 +20,36 @@ namespace MVCUI.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditTournamentMatchup(MatchupMVCModel model)
+        [ValidateAntiForgeryToken()]
+
+        public ActionResult EditTournamentMatchup(MatchupMVCModel model) //TODO
         {
-            return View();
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    List<TournamentModel> tournaments = GlobalConfig.Connection.GetTournament_All();
+                    TournamentModel t = tournaments.Where(x => x.Id == model.TournamentId).First();
+                    MatchupModel match;
+
+
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return View();
+                }
+            }
+            catch
+            {
+                return View();
+            }
         }
 
-        public ActionResult Details(int? id, int roundId = 0)
+        public ActionResult Details(int id, int roundId = 0)
         {
             List<TournamentModel> tournaments = GlobalConfig.Connection.GetTournament_All();
-            
+
             try
             {
                 TournamentMVCDetailsModel input = new TournamentMVCDetailsModel();
@@ -67,11 +88,11 @@ namespace MVCUI.Controllers
 
                 }
 
-                input.Matchups = GetMatchups(orderedRounds[roundId - 1]);
+                input.Matchups = GetMatchups(orderedRounds[roundId - 1], id, roundId);
 
                 return View(input);
             }
-            catch 
+            catch
             {
 
                 return RedirectToAction("Index", "Home");
@@ -79,7 +100,7 @@ namespace MVCUI.Controllers
 
         }
 
-        private List<MatchupMVCModel> GetMatchups(List<MatchupModel> input, int roundId = 0)
+        private List<MatchupMVCModel> GetMatchups(List<MatchupModel> input, int tournamentId, int roundId = 0)
         {
             List<MatchupMVCModel> output = new List<MatchupMVCModel>();
 
@@ -116,8 +137,8 @@ namespace MVCUI.Controllers
                 output.Add(new MatchupMVCModel
                 {
                     MatchupId = item.Id,
-                    //TournamentId = tournamentId,
-                    //RoundNumber = roundId,
+                    TournamentId = tournamentId,
+                    RoundNumber = roundId,
                     FirstTeamMatchupEntryId = item.Entries[0].Id,
                     FirstTeamName = teamOneName,
                     FirstTeamScore = item.Entries[0].Score,
@@ -134,7 +155,7 @@ namespace MVCUI.Controllers
         public ActionResult Create()
         {
             TournamentMVCCreateModel input = new TournamentMVCCreateModel();
-            
+
             List<TeamModel> allTeams = GlobalConfig.Connection.GetTeam_All();
 
             List<PrizeModel> allPrizes = GlobalConfig.Connection.GetPrizes_All();
