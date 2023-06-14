@@ -20,7 +20,7 @@ namespace MVCUI.Controllers
         }
 
         [HttpPost]
-        public ActionResult Details(MatchupMVCModel model)
+        public ActionResult EditTournamentMatchup(MatchupMVCModel model)
         {
             return View();
         }
