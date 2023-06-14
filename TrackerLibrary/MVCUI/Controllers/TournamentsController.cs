@@ -197,11 +197,18 @@ namespace MVCUI.Controllers
             {
                 if (ModelState.IsValid && model.SelectedEnteredTeams.Count > 0)
                 {
+                    List<TeamModel> allTeams = GlobalConfig.Connection.GetTeam_All();
+                    List<PrizeModel> allPrizes = GlobalConfig.Connection.GetPrizes_All();
+
                     TournamentModel t = new TournamentModel();
                     t.TournamentName = model.TournamentName;
                     t.EntryFee = model.EntryFee;
-                    t.EnteredTeams = model.SelectedEnteredTeams.Select(x => new TeamModel { Id = int.Parse(x) }).ToList();
-                    t.Prizes = model.SelectedPrizes.Select(x => new PrizeModel { Id = int.Parse(x) }).ToList();
+
+                    t.EnteredTeams = model.SelectedEnteredTeams.Select(x => allTeams.Where(y => y.Id == int.Parse(x)).First()).ToList();
+                    t.Prizes = model.SelectedPrizes.Select(x => allPrizes.Where(y => y.Id == int.Parse(x)).First()).ToList();
+
+                    //t.EnteredTeams = model.SelectedEnteredTeams.Select(x => new TeamModel { Id = int.Parse(x) }).ToList();
+                    //t.Prizes = model.SelectedPrizes.Select(x => new PrizeModel { Id = int.Parse(x) }).ToList();
 
                     TournamentLogic.CreateRounds(t);
 
@@ -217,7 +224,7 @@ namespace MVCUI.Controllers
                     return RedirectToAction("Create");
                 }
             }
-            catch
+            catch (Exception ex)
             {
                 return View();
             }
