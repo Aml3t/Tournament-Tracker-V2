@@ -37,7 +37,8 @@ namespace TrackerLibrary
             {
                 foreach(MatchupModel rm in round)
                 {
-                    if(rm.Winner == null && rm.Entries.Any(x => x.Score != 0) || rm.Entries.Count == 1)
+                    //rm.Winner == null && 
+                    if ((rm.Entries.Any(x => x.Score != 0)) || rm.Entries.Count == 1)
                     {
                         toScore.Add(rm);
                     }
@@ -107,6 +108,19 @@ namespace TrackerLibrary
             to = p.EmailAddress;
 
             EmailLogic.SendEmail( to, subject, body.ToString());
+
+            if (p.CellphoneNumber.Length > 0)
+            {
+                if (competitor != null)
+                {
+                    SMSLogic.SendSMSMessage(p.CellphoneNumber, $"You have a new matchup with {competitor.TeamCompeting.TeamName}");
+                }
+                else
+                {
+                    SMSLogic.SendSMSMessage(p.CellphoneNumber, $"You have a bye week for the first round.");
+                }
+
+            }
         }
 
         private static int CheckCurrentRound(this TournamentModel model)
@@ -129,7 +143,6 @@ namespace TrackerLibrary
             CompleteTournament(model);
 
             return output - 1;
-
         }
 
         private static void CompleteTournament(TournamentModel model)
@@ -140,7 +153,6 @@ namespace TrackerLibrary
 
             decimal winnerPrize = 0;
             decimal runnerUpPrize = 0;
-
 
 
             if (model.Prizes.Count > 0)
